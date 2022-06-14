@@ -6,7 +6,7 @@ router.use(express.json())
 
 router.get('/', (req, res, next) => {
   // DO YOUR MAGIC
-  getAll()
+  getAll(req.query)
     .then(result=>res.json(result))
     .catch(error=>next(error))
 })
@@ -15,6 +15,7 @@ router.get('/:id', checkAccountId, (req, res, next) => {
   // DO YOUR MAGIC
   res.json(req.account)
 })
+
 
 router.post('/',checkAccountPayload, checkAccountNameUnique, (req, res, next) => {
   // DO YOUR MAGIC
@@ -45,11 +46,7 @@ router.delete('/:id', checkAccountId, (req, res, next) => {
 
 router.use((error, req, res, next) => { // eslint-disable-line
   // DO YOUR MAGIC
-    if(error){
-        return res.status(500).json({message:'Server error'})
-    }else{
-        next()
-    }
+    res.status(error.status || 500).json({message: error.message})
 })
 
 module.exports = router;
