@@ -3,15 +3,15 @@ const db = require('../../data/db-config')
 const getAll = (query) => {
   //limit ? undefined
   //sortdir ? undefined
-  const {limit, sortby, sortdir} = query
-  
+  /*const {limit, sortby, sortdir} = query
+  console.log(limit, sortby, sortdir)
   if(sortdir && limit){
     return db('accounts').orderBy(sortdir, sortby ? sortby : 'asc').limit(limit)
   }else if(limit){
     return db('accounts').limit(limit)
-  }else{
+  }else{*/
     return db('accounts')
-  }
+  //}
 }
 
 const getById = id => {
